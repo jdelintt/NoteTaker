@@ -27,8 +27,12 @@ module.exports = function (app) {
       }
       const notes = JSON.parse(data);
 
-      // add new note ro array
-      // save stringified version of updated array to db/dbb.json
+      notes.push(newNote);
+      fs.writeFileSync(
+        path.resolve(__dirname, "../db/db.json"),
+        JSON.stringify(notes),
+        "utf8"
+      );
 
       res.json(notes);
     });
@@ -45,8 +49,12 @@ module.exports = function (app) {
       }
       const notes = JSON.parse(data);
 
-      // remover note ad index id
-      // save stringified version of updated array to db/dbb.json
+      notes.splice(id, 1);
+      fs.writeFileSync(
+        path.resolve(__dirname, "../db/db.json"),
+        JSON.stringify(notes),
+        "utf8"
+      );
 
       res.json(notes);
     });
